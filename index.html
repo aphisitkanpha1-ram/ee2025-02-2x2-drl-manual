@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRL 2X2 ORBITAL COMMAND</title>
+    <title>DRL 2X2 OPS MANUAL</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
@@ -27,7 +27,6 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            /* พื้นหลัง Grid เรดาร์ */
             background-image: 
                 linear-gradient(var(--grid-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
@@ -35,7 +34,6 @@
             position: relative;
         }
 
-        /* เอฟเฟกต์เส้นสแกนหน้าจอ CRT */
         body::after {
             content: " ";
             display: block;
@@ -73,7 +71,6 @@
             margin-top: 5px;
         }
 
-        /* Cursor กะพริบ */
         .blink {
             animation: blinker 1s linear infinite;
         }
@@ -81,7 +78,6 @@
             50% { opacity: 0; }
         }
 
-        /* กล่องข้อมูล Mission Control */
         .term-box {
             background: rgba(0, 20, 0, 0.4);
             border: 1px solid var(--border-dark);
@@ -117,7 +113,6 @@
 
         p, li { font-size: 1rem; line-height: 1.5; margin: 5px 0; }
 
-        /* กริดข้อมูลเพื่อความ Data-Dense */
         .data-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -130,7 +125,6 @@
         .data-col span { display: block; color: var(--neon-blue); font-size: 0.8rem; }
         .data-col strong { font-size: 1.1rem; }
 
-        /* Launch Sequence List */
         .seq-list { list-style: none; padding: 0; }
         .seq-list li {
             margin-bottom: 15px;
@@ -146,7 +140,6 @@
         .seq-list li:hover::before { content: "[*]"; color: var(--neon-blue); }
         .cmd { color: var(--alert-red); font-weight: bold; }
 
-        /* Action Buttons (Sci-Fi Style) */
         .btn-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -187,7 +180,6 @@
 
         .cmd-btn span { display: block; font-size: 0.8rem; opacity: 0.7; margin-top: 5px; }
 
-        /* Mini Terminal Log */
         .mini-log {
             font-size: 0.85rem;
             color: var(--border-dark);
@@ -197,29 +189,52 @@
         }
         .mini-log span.ok { color: var(--term-green); }
 
+        /* --- MUSIC CONTROL UI (Terminal Style) --- */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 20, 0, 0.8);
+            border: 1px solid var(--border-dark);
+            border-left: 4px solid var(--term-green);
+            padding: 10px 15px;
+            color: var(--term-green);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .music-control:hover {
+            background: var(--term-green);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px var(--term-green-dim);
+        }
+
     </style>
 </head>
 <body>
 
     <div class="container">
         <header>
-            <h1>DRL 2X2 ORBITAL COMMAND</h1>
+            <h1>DRL 2X2 OPERATIONS MANUAL</h1>
             <div class="sys-status">SYSTEM STATUS: STANDBY <span class="blink">_</span></div>
         </header>
 
         <div class="term-box">
             <h2 class="box-title">MISSION BRIEFING</h2>
-            <p><strong>SUBJECT:</strong> Dynamic Topology Reconfiguration System (2x2 Matrix)</p>
-            <p><strong>OBJECTIVE:</strong> Optimize power output under partial shading via Deep Reinforcement Learning (DDQN).</p>
+            <p><strong>SUBJECT:</strong> Photovotaic Reconfiguration System (2x2 Matrix)</p>
+            <p><strong>OBJECTIVE:</strong> Optimize power output under partial shading via Deep Reinforcement Learning (DRL).</p>
             
             <div class="data-grid">
                 <div class="data-col">
                     <span>CORE ENGINE</span>
-                    <strong>Python / DDQN</strong>
+                    <strong>Python / DRL</strong>
                 </div>
                 <div class="data-col">
                     <span>EXECUTOR</span>
-                    <strong>ESP32 Combiner</strong>
+                    <strong>ESP32 & Combiner</strong>
                 </div>
                 <div class="data-col">
                     <span>HARDWARE</span>
@@ -227,7 +242,7 @@
                 </div>
             </div>
             <div class="mini-log">
-                > I2C_SCAN_LOG: 0x70 [MAX44009] <span class="ok">OK</span> | 0x20-0x24 [MCP23017] <span class="ok">OK</span>
+                > I2C_SCAN_LOG: 0x70-0x71 [TCA9548A] <span class="ok">OK</span> | 04B [MAX44009] <span class="ok">OK</span> | 0x20-0x24 [MCP23017] <span class="ok">OK</span>
             </div>
         </div>
 
@@ -240,16 +255,16 @@
                     Establish Wi-Fi tether. Check ESP32 Local IP via Serial Monitor (Baud: 115200).</li>
                 <li><strong>PHASE 3: CORE IGNITION</strong><br>
                     Execute terminal command: <span class="cmd">python main_auto.py</span> (Verify COM Port config).</li>
-                <li><strong>PHASE 4: ORBITAL SHADING TEST</strong><br>
+                <li><strong>PHASE 4: REAL TEST</strong><br>
                     Proceed with 10 Cases protocol. Maintain 10-15s hold per case for AI smoothing & stabilization.</li>
             </ul>
         </div>
 
         <div class="btn-grid">
             
-            <a href="http://192.168.X.X" target="_blank" class="cmd-btn">
-                [ TELEMETRY MONITOR ]
-                <span>Access Real-time ESP32 Dashboard</span>
+            <a href="https://docs.google.com/document/d/1G9YE31550vbS5z5PUdop_xGaVicVFza7lO3IAhC0t4M/edit?usp=sharing" target="_blank" class="cmd-btn">
+                [ 2x2 DRL MANUAL ]
+                <span>Access 2x2 DRL Manual Document</span>
             </a>
 
             <a href="#" target="_blank" class="cmd-btn blue">
@@ -275,5 +290,62 @@
 
     </div>
 
+    <div id="youtube-player" style="position:fixed; bottom:-100px; left:-100px; width:1px; height:1px; overflow:hidden;"></div>
+
+    <div class="music-control" id="music-btn" onclick="toggleMusic()">
+        <span id="music-text">[ AUDIO: OFF ]</span>
+    </div>
+
+    <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var isPlaying = false;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                videoId: 'WHqbqzqeskw',
+                playerVars: {
+                    'autoplay': 0,
+                    'loop': 1,
+                    'playlist': 'WHqbqzqeskw',
+                    'start': 32,
+                    'origin': window.location.origin
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            console.log("System: Star-link Audio Connection Ready");
+        }
+
+        function toggleMusic() {
+            const text = document.getElementById('music-text');
+
+            if (!player || typeof player.playVideo !== 'function') {
+                alert("SYSTEM WARNING: Waiting for Satellite Connection... (กรุณารอสักครู่ให้ระบบเสียงโหลดครับ)");
+                return;
+            }
+
+            if (!isPlaying) {
+                player.unMute(); 
+                player.setVolume(80); 
+                player.playVideo();
+                text.innerText = "[ AUDIO: ON ]";
+                isPlaying = true;
+                console.log("System: Audio playback initiated at T+32s.");
+            } else {
+                player.pauseVideo();
+                text.innerText = "[ AUDIO: OFF ]";
+                isPlaying = false;
+            }
+        }
+    </script>
 </body>
 </html>
