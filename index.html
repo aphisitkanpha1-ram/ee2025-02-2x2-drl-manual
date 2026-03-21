@@ -189,29 +189,6 @@
         }
         .mini-log span.ok { color: var(--term-green); }
 
-        /* --- MUSIC CONTROL UI (Terminal Style) --- */
-        .music-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0, 20, 0, 0.8);
-            border: 1px solid var(--border-dark);
-            border-left: 4px solid var(--term-green);
-            padding: 10px 15px;
-            color: var(--term-green);
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.9rem;
-            cursor: pointer;
-            z-index: 100;
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-        }
-        .music-control:hover {
-            background: var(--term-green);
-            color: var(--bg-color);
-            box-shadow: 0 0 15px var(--term-green-dim);
-        }
-
     </style>
 </head>
 <body>
@@ -295,57 +272,6 @@
     <div class="music-control" id="music-btn" onclick="toggleMusic()">
         <span id="music-text">[ AUDIO: OFF ]</span>
     </div>
-
-    <script>
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
-        var isPlaying = false;
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                videoId: 'WHqbqzqeskw',
-                playerVars: {
-                    'autoplay': 0,
-                    'loop': 1,
-                    'playlist': 'WHqbqzqeskw',
-                    'start': 465,
-                    'origin': window.location.origin
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            console.log("System: Star-link Audio Connection Ready");
-        }
-
-        function toggleMusic() {
-            const text = document.getElementById('music-text');
-
-            if (!player || typeof player.playVideo !== 'function') {
-                alert("SYSTEM WARNING: Waiting for Satellite Connection... (กรุณารอสักครู่ให้ระบบเสียงโหลดครับ)");
-                return;
-            }
-
-            if (!isPlaying) {
-                player.unMute(); 
-                player.setVolume(80); 
-                player.playVideo();
-                text.innerText = "[ AUDIO: ON ]";
-                isPlaying = true;
-                console.log("System: Audio playback initiated at T+32s.");
-            } else {
-                player.pauseVideo();
-                text.innerText = "[ AUDIO: OFF ]";
-                isPlaying = false;
-            }
-        }
-    </script>
+</script>
 </body>
 </html>
